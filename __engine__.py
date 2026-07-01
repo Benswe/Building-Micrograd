@@ -1,6 +1,5 @@
 import math 
 import numpy as np
-import matplotlib.pyplot as plt
 
 """
 this is where we will define all of our operations that we can do 
@@ -71,6 +70,15 @@ class Value:
         out = Value(np.exp(self.data), _children=(self, ), _op = 'exp') 
         def _backward():
             self.grad += out.data * out.grad
+        
+        out._backward = _backward
+        return out
+    
+    def log(self):
+        out = Value(np.log(self.data), _children=(self, ), _op="log")
+
+        def _backward():
+            self.grad += (1/self.data) * out.grad
         
         out._backward = _backward
         return out

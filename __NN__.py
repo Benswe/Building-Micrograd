@@ -50,7 +50,7 @@ class MLP:
         for layer in self.MLP:
             x = layer(prev_x)
             prev_x = x
-        return prev_x[0]
+        return prev_x
 
     
     def parameters(self):
@@ -71,9 +71,9 @@ if __name__ == "__main__":
     ]
 
 
-    model = MLP(3, [10, 10, 1]) # input layer of 5, then two intermediate layers of 4 
+    model = MLP(3, [6, 6, 1]) # input layer of 5, then two intermediate layers of 4 
     ys = [0.92, -0.1, 0.58391]
-    for _ in range(100):
+    for _ in range(20):
         # forward pass
         preds = [model(x) for x in xs]
         loss = sum([((pred - y)**2) for y,pred in zip(ys, preds)])/len(preds)
